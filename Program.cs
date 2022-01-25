@@ -14,13 +14,13 @@ namespace HomeWorkShop2
             int allClient = 0;
             int revenue = 0;
             Queue<string> clients = new Queue<string>();
-            List<int> servicePrices = new List<int>(6) { 100, 200, 300, 400, 500, 600 };             
+            List<int> servicePrices = new List<int>() { 100, 200, 300, 400, 500, 600 };             
 
             Console.WriteLine("Укажите количесво клиентов записаных сегодня на приём очереди");
             allClient = Convert.ToInt32(Console.ReadLine());
-            AddClient(ref clients, allClient);
+            AddClients (ref clients, allClient);
             Console.WriteLine("Ваш список клиентов");
-            ShowAllKlients(clients);
+            ShowAllClients(clients);
 
             while (allClient != 0)
             {
@@ -29,7 +29,7 @@ namespace HomeWorkShop2
                 allMoneyShop = allMoneyShop +  revenue;
                 Console.WriteLine($"Клиент выбрал услугу  ценой  {revenue} рублей.");
                 Console.WriteLine($"Баланс магазина состовляет {allMoneyShop}");
-                DelleteKlient(ref clients, ref allClient);
+                DelleteСlient(clients, ref allClient);
                 Console.ReadLine();
                 Console.Clear();
                 
@@ -37,7 +37,7 @@ namespace HomeWorkShop2
             Console.WriteLine("клиентов больше нету.");                   
         }
 
-        static void AddClient(ref Queue<string> clients, int allClient)
+        static void AddClients (ref Queue<string> clients, int allClient)
         {
             int numberClient;
             for (int i = 0; i < allClient; i++)
@@ -47,15 +47,15 @@ namespace HomeWorkShop2
             }
         }
 
-        static void ShowAllKlients(Queue<string> clients)
+        static void ShowAllClients(Queue<string> clients)
         {
-            foreach (var klient in clients)
+            foreach (var client in clients)
             {
-                Console.WriteLine(klient);
+                Console.WriteLine(client);
             }            
         }
 
-        static void DelleteKlient(ref Queue<string> clients, ref int allClient)
+        static void DelleteСlient(Queue<string> clients, ref int allClient)
         {
             allClient = allClient - 1;
             clients.Dequeue();
@@ -65,8 +65,8 @@ namespace HomeWorkShop2
         {
             Random random = new Random();
             int minIndexServices = 0;
-            int maxIndexServices = 5;
-            int index = random.Next(minIndexServices, maxIndexServices + 1);
+            int maxIndexServices = servicePrices.Count;
+            int index = random.Next(minIndexServices, maxIndexServices);
             revenue = servicePrices[index];                      
         }
     }
